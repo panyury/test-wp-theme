@@ -1,0 +1,291 @@
+.slider-container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Верхний блок с заголовками */
+.title-slider {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.title-slider .swiper-slide {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: 400;
+    text-align: left;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.title-slider .swiper-slide-active {
+    opacity: 1;
+}
+
+/* Основной слайдер */
+.main-slader {
+    width: 100%;
+    position: relative;
+}
+
+.main-slader .swiper {
+    overflow: hidden; /* Оставляем скрытие слайдов */
+}
+
+.main-slader .swiper-wrapper {
+    overflow: visible !important; /* Разрешаем выход стрелок за контейнер */
+}
+
+.main-slader .swiper-slide {
+    width: 300px !important;
+    height: 370px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: border 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+.main-slader .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Обводка активного слайда */
+.main-slader .swiper-slide-active {
+    border: 1px solid #000;
+}
+
+/* Пагинация */
+.swiper-pagination {
+	position: relative;
+	padding-top: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.swiper-pagination .swiper-pagination-bullet {
+	width: 30px;
+	height: 30px;
+	position: relative;
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	transition: 0.4s ease;
+}
+
+.swiper-pagination .swiper-pagination-bullet::after {
+	content: '';
+	display: block;
+	border-radius: 100%;
+	width: 3px;
+	height: 3px;
+	background: #8A8A8A;
+}
+
+.swiper-pagination .swiper-pagination-bullet::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 100%;
+	width: 0;
+	height: 0;
+	border: 1px solid transparent;
+	transition: 0.4s cubic-bezier(0.12, 0, 0.39, 0);
+}
+
+.swiper-pagination .swiper-pagination-bullet-active::after {
+	background: #997F5A;
+}
+
+.swiper-pagination .swiper-pagination-bullet-active::before {
+	border: 1px solid rgb(153, 127, 90, 0.5);
+	width: 100%;
+	height: 100%;
+}
+
+/* Стрелки Swiper */
+.swiper-button-next,
+.swiper-button-prev {
+    position: absolute;
+    top: calc((370px - 72px) / 2);
+	transform: none;
+    width: 72px;
+    height: 72px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+	box-shadow: 0 9px 30px 0 rgba(206, 207, 209, 0.9);
+}
+
+.swiper-button-next:hover svg path,
+.swiper-button-prev:hover svg path {
+	fill: transparent;
+}
+
+/* Расположение стрелок */
+.swiper-button-prev {
+    left: -36px;
+}
+
+.swiper-button-next {
+    right: -36px;
+	transform: rotate(180deg);
+}
+
+/* Стилизация SVG внутри стрелок */
+.swiper-button-prev svg,
+.swiper-button-next svg {
+    width: 24px;
+    height: 24px;
+    stroke: #222222;
+}
+
+/* Адаптация для экранов 375px */
+@media (max-width: 375px) {
+    .main-slader .swiper-slide {
+		width: 240px !important;
+		height: 300px;
+	}
+	
+    /* Скрываем стрелки */
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none !important;
+    }
+}
+
+#popup-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 881px;
+    max-width: 90%;
+    background: white;
+    padding: 48px;
+    border-radius: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    display: none; /* По умолчанию скрываем */
+    z-index: 1000;
+	max-height: 80vh;
+    overflow: hidden;
+}
+
+.popup-content {
+    position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 17px;
+    padding: 0;
+    text-align: center;
+}
+
+.popup-content .popup-header {
+	width: 100%;
+	max-width: 752px;
+	font-size: 24px;
+	font-weight: bold;
+	padding-bottom: 17px;
+	border-bottom: 1px solid #8A8A8A;
+}
+
+.popup-content .popup-text {
+	font-size: 18px;
+	font-weight: 400;
+	max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.close-modal {
+    position: absolute;
+    top: -36px;
+    right: -36px;
+    font-size: 24px;
+    cursor: pointer;
+	color: #997F5A
+}
+
+/* Затемнение фона при открытии */
+#popup-modal.active {
+    display: block;
+}
+
+/* Затемнение фона */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+.popup-overlay.active {
+    display: block;
+}
+
+/* Адаптация для экранов 375px */
+@media (max-width: 375px) {
+	#popup-modal {
+		padding: 48px 16px;
+	}
+	
+	.close-modal {
+		top: -32px;
+		right: 50%;
+		transform: translateX(50%);
+	}
+	
+	.popup-content .popup-header {
+		max-width: 296px;
+	}
+}
+
+/* Стилизация скролла в popup */
+.popup-content .popup-text {
+    scrollbar-width: thin; /* Уменьшаем ширину скролла в Firefox */
+    scrollbar-color: #997F5A #EFEEEA; /* Цвет ползунка и фона в Firefox */
+}
+
+/* Кастомный скролл для WebKit (Chrome, Safari) */
+.popup-content .popup-text::-webkit-scrollbar {
+    width: 3px; /* Ширина скроллбара */
+    background-color: #EFEEEA; /* Фон скролла */
+}
+
+.popup-content .popup-text::-webkit-scrollbar-thumb {
+    background-color: #997F5A; /* Цвет ползунка */
+    border-radius: 3px;
+}
+
+.popup-content .popup-text::-webkit-scrollbar-thumb:hover {
+    background-color: #8A6D49; /* Чуть темнее при наведении */
+}
+
+.popup-content .popup-text::-webkit-scrollbar-track {
+    background-color: #EFEEEA; /* Фон дорожки */
+}
+
+/* Отключаем стандартные скроллы в Firefox */
+.popup-content .popup-text {
+    scrollbar-width: thin;
+    scrollbar-color: #997F5A #EFEEEA;
+}

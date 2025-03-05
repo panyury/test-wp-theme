@@ -1,1 +1,1 @@
-# test-wp-theme
+# test_wp_theme
